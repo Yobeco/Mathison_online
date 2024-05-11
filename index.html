@@ -7,25 +7,56 @@
 
 </head>
   <body>
+    <div id="page">
 
-    <div id=buttonsContainer> 
+      <div id=buttonsContainer> 
 
-      <audio id="lecteurAudio" controls tabindex="-1"  preload="auto">
-        <source src="Medias/Madison.mp3" type="audio/mpeg">
-        Votre navigateur ne supporte pas l'élément audio.
-      </audio>
+        <audio id="lecteurAudio" controls tabindex="-1"  preload="auto">
+          <source src="Medias/Madison.mp3" type="audio/mpeg">
+          Votre navigateur ne supporte pas l'élément audio.
+        </audio>
 
-      <audio id="lecteurSon" controls tabindex="-1"  preload="auto">
-        <source src="Medias/Change.mp3" type="audio/mpeg">
-      </audio>
+        <audio id="lecteurSon" controls tabindex="-1"  preload="auto">
+          <source src="Medias/Change.mp3" type="audio/mpeg">
+        </audio>
 
-      <button class="buttons" onclick="stopAudio()">Stop</button>
+        <button class="buttons" id="stopButton">Stop</button>
 
-    </div>
+      </div>
 
-    <div id=pictureContainer tabindex="0"> 
 
-      <img id=picture src="Medias/LogoMathison.png">
+
+      <div id=pictureContainer tabindex="0"> 
+
+        <img id=picture src="Medias/LogoMathison.png">
+
+      </div>
+
+
+
+      <div id=pavContainer tabindex="-1"> 
+
+        <table>
+          <tr>
+            <td> </td>
+            <td><img class="keyPad" id="keyPadUp" src="Medias/Up-Y-key.png"></td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td><img class="keyPad" id="keyPadLeft" src="Medias/Left-Y-key.png"></td>
+            <td> </td>
+            <td><img class="keyPad" id="keyPadRight" src="Medias/Right-Y-key.png"></td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td><img class="keyPad" id="keyPadDown" src="Medias/Down-Y-key.png"></td>
+            <td> </td>
+          </tr>
+        </table>
+
+      </div>
+
+
 
     </div>
 
