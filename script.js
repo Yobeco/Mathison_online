@@ -1,3 +1,7 @@
+//      Mathison
+//  Objectif : Ajouter clavier virtuel pour fonctionner sur téléphone
+// 
+
 const lecteurAudio = document.getElementById('lecteurAudio');
 const lecteurSon = document.getElementById('lecteurSon');
 
@@ -7,6 +11,7 @@ function stopAudio() {
     lecteurAudio.currentTime = 0; // Rembobine au début
     // Changer la source de l'image
     document.getElementById('picture').src = 'Medias/LogoMathison.png';
+    document.getElementById('pictureContainer').focus();
 }
 
 
@@ -27,11 +32,28 @@ lecteurAudio.addEventListener('focus', function() {
 // Variable "flag" pour le changement de la couleur des flèches
 let color = true
 
+// À étudier pour simplifier le code :
+// let dictKey = {
+//   "ArrowUp" : [104,"Up-Y","Up-B"],
+//   "ArrowDown" : [98,"Down-Y","Down-B"]
+// };
+
+/**
+Codes pour les touches du pavé numérique :
+    NumLock : 144
+    / (Division) : 111
+    * (Multiplication) : 106
+    - (Soustraction) : 109
+    + (Addition) : 107
+    Enter (Entrée du pavé numérique) : 108 ou 13 (varie selon les navigateurs)
+    . (Point décimal) : 110
+    0 à 9 : 96 à 105
+**/
 
 document.addEventListener('keydown', function(event) {
 
-    // Vérifiez quelle touche a été enfoncée (par exemple, touche 'a' pour cet exemple)
-    if (event.key === 'ArrowUp') {
+    // Si flèche du haut appuyée ou  8 du pavet numérique:
+    if (event.key === 'ArrowUp' || event.keyCode === 104) {
         lecteurSon.play();
 
         // Changer la source de l'image
@@ -45,7 +67,8 @@ document.addEventListener('keydown', function(event) {
         color = !color
     }
 
-    if (event.key === 'ArrowDown') {
+
+    if (event.key === 'ArrowDown' || event.keyCode === 98) {
         lecteurSon.play();
 
         // Changer la source de l'image
@@ -59,7 +82,7 @@ document.addEventListener('keydown', function(event) {
         color = !color
     }
 
-    if (event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowLeft' || event.keyCode === 102) {
         lecteurSon.play();
 
         // Changer la source de l'image
@@ -72,7 +95,7 @@ document.addEventListener('keydown', function(event) {
         color = !color
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === 'ArrowRight' || event.keyCode === 100) {
         lecteurSon.play();
 
         // Changer la source de l'image
@@ -84,5 +107,17 @@ document.addEventListener('keydown', function(event) {
         }
         color = !color
     }
+
+
+    if (event.code === 'Space' || event.keyCode === 32) {
+
+        if (lecteurAudio.paused) {
+          lecteurAudio.play(); // Arrête la lecture
+        } else if (lecteurAudio.play) {
+          lecteurAudio.pause(); // Arrête la lecture
+        }
+
+    }
+
 
 });
