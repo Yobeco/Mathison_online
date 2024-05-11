@@ -1,17 +1,21 @@
-//      Mathison
-//  Objectif : Ajouter du pavet numérique et de la barre espace
-// 
+//      Mathison 0.2
+//  Objectifs de cette version : 
+//  Ajouter du pavet numérique et de la barre espace
 
+
+// Ne lancer le script que quand toute la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
 
     const lecteurAudio = document.getElementById('lecteurAudio');
     const lecteurSon = document.getElementById('lecteurSon');
     const boutonStop = document.getElementById('stopButton');
 
+    // Ajouter une fonction qui sera lancée quand on clique sur le bouton "stopButton"
     boutonStop.onclick = function() {
       stopAudio();
     };
 
+    // Fonction qui arrête la musique et affiche l'image d'accueil
     function stopAudio() {
         lecteurAudio.pause(); // Arrête la lecture
         lecteurAudio.currentTime = 0; // Rembobine au début
@@ -20,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('pictureContainer').focus();
     }
 
+    // Mettre le focus ailleur que sur le lecteur, sinon, appuyer sur les flèches affectent la lecture
     function leaveFocus(){
         // Empêcher l'événement par défaut (le focus du lecteur audio)
         event.preventDefault();
@@ -37,11 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Variable "flag" pour le changement de la couleur des flèches
     let color = true
 
-    // À étudier pour simplifier le code :
-    // let dictKey = {
-    //   "ArrowUp" : [104,"Up-Y","Up-B"],
-    //   "ArrowDown" : [98,"Down-Y","Down-B"]
-    // };
 
     /**
     Codes pour les touches du pavé numérique :
@@ -53,12 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
         Enter (Entrée du pavé numérique) : 108 ou 13 (varie selon les navigateurs)
         . (Point décimal) : 110
         0 à 9 : 96 à 105
+
+        Site donnant tous les codes pour la méthode "event.keyCode"
+        https://www.toptal.com/developers/keycode
     **/
 
-    function ArrowUpFunc(){
-        lecteurSon.play();
+    //////////////////////////////////////////////////////////
+    //   Définition des fonctions lancées par les touches   //
+    //////////////////////////////////////////////////////////
 
-        // Changer la source de l'image
+    // À étudier pour simplifier le code :
+    // let dictKey = {
+    //   "ArrowUp" : [104,"Up-Y","Up-B"],
+    //   "ArrowDown" : [98,"Down-Y","Down-B"]
+    // };
+
+    function ArrowUpFunc(){
+        lecteurSon.play();     // Jouer un charleston
+
+        // Changer la source de l'image selon la variable "color"
         if (color == true){
             document.getElementById('picture').src = 'Medias/Up-Y.png';
         }
@@ -72,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function ArrowDownFunc(){
         lecteurSon.play();
 
-        // Changer la source de l'image
         if (color == true){
             document.getElementById('picture').src = 'Medias/Down-Y.png';
         }
@@ -86,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function ArrowLeftFunc(){
         lecteurSon.play();
 
-        // Changer la source de l'image
         if (color == true){
             document.getElementById('picture').src = 'Medias/Left-Y.png';
         }
@@ -99,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function ArrowRightFunc(){
             lecteurSon.play();
 
-            // Changer la source de l'image
             if (color == true){
                 document.getElementById('picture').src = 'Medias/Right-Y.png';
             }
@@ -113,25 +123,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.addEventListener('keydown', function(event) {
 
-        // Si flèche du haut appuyée ou  8 du pavet numérique:
-        if (event.key === 'ArrowUp' || event.keyCode === 104) {
+
+        if (event.key === 'ArrowUp' || event.keyCode === 104) {      // Flèche du haut / 8 du pavet numérique
             ArrowUpFunc();
         }
 
-        if (event.key === 'ArrowDown' || event.keyCode === 98) {
+        if (event.key === 'ArrowDown' || event.keyCode === 98) {      // Flèche du bas / 2 du pavet numérique
             ArrowDownFunc();
         }
 
-        if (event.key === 'ArrowLeft' || event.keyCode === 102) {
+        if (event.key === 'ArrowLeft' || event.keyCode === 102) {      // Flèche de gauche / 4 du pavet numérique
             ArrowLeftFunc();
         }
 
-        if (event.key === 'ArrowRight' || event.keyCode === 100) {
+        if (event.key === 'ArrowRight' || event.keyCode === 100) {      // Flèche de droite / 6 du pavet numérique
             ArrowRightFunc();
         }
 
 
-        if (event.code === 'Space' || event.keyCode === 32) {
+        if (event.code === 'Space' || event.keyCode === 32) {      // Touche espace pour jouer / mettre en pause
 
             if (lecteurAudio.paused) {
               lecteurAudio.play(); // Arrête la lecture
@@ -144,6 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
+    // Mise en place des "écouteurs" sur les flèches du pavet virtuel pour écran tactil
+    // Lague énormément...  À améliorer ou à enlenver...
 
     const KeyPadUp = document.getElementById('keyPadUp')
 
